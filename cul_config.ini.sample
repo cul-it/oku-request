@@ -1,0 +1,11 @@
+; CUL custom configuration
+; These values are used both by Mantis and by the CUL custom reservation form
+
+[database]
+db_host = 
+db_user = 
+db_pass = 
+db_database = 
+
+[Hashids]
+hashid_salt = 
