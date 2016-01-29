@@ -1,6 +1,10 @@
 ; CUL custom configuration
 ; These values are used both by Mantis and by the CUL custom reservation form
 
+[version]
+; This is the version number for the custom CUL system, not Mantis
+cul_version = 
+
 [database]
 db_host = 
 db_user = 
