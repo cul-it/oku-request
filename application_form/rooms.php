@@ -272,12 +272,12 @@ if ($_FILES['attachment']['error'] != 4) {
       $uploadOk = 0;
   }
 
-  // Allow certain file formats
-  // if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-  // && $imageFileType != "gif" && $imageFileType != 'pdf' && $imageFileType != 'txt') {
-  //     echo "Your file could not be uploaded (bad file type)";
-  //     $uploadOk = 0;
-  // }
+  // Allow only certain file formats
+  if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+  && $imageFileType != "gif" && $imageFileType != 'pdf' && $imageFileType != 'txt') {
+      echo "Your file could not be uploaded (bad file type)";
+      $uploadOk = 0;
+  }
 
   // Check if $uploadOk is set to 0 by an error
   if ($uploadOk == 0) {
