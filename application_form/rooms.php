@@ -305,6 +305,7 @@ if ($_FILES['attachment']['error'] != 4) {
 <html>
 <head>
   <title>Request to Use OKU Library Space</title>
+  <link rel="shortcut icon" href="img/favicon.png" type="image/png" />
   <link rel="stylesheet" type="text/css" href="css/roomreserve.css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
@@ -341,7 +342,7 @@ else {
   $hash_array = encode_link($newIssueId, $_POST['submitter_email']);
   $link_id = $hashids->encode($hash_array);
   
-  echo "<p>You have created request #$newIssueId: $issueTitle</p>";
+  echo "<h1>You have created request #$newIssueId: $issueTitle</h1>";
   
 ?>
   <br><br><p>Thank you for submitting your request using the online Library Space Request Form.</p> 

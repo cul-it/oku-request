@@ -35,6 +35,7 @@ catch (SoapFault $exception) {
 <html>
 <head>
   <title>Request to Use OKU Library Space</title>
+  <link rel="shortcut icon" href="img/favicon.png" type="image/png" />
   <link rel="stylesheet" type="text/css" href="css/roomreserve.css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
