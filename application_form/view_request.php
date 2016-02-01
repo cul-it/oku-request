@@ -19,11 +19,6 @@ $hashids = new Hashids\Hashids($cul_ini_array['hashid_salt']);
 $id = $_GET['id'];
 list($issue_id, $email) = decode_hash($hashids, $id);
 
-echo '<html><head><title>Request to Use OKU Library Space</title><link rel="stylesheet" type="text/css" href="css/roomreserve.css"/>';
-echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>';
-echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>';
-echo '</head>';
-
 # Get bug data from Mantis
 #$bugdata = bug_get($issue_id, true);
 try {
@@ -37,6 +32,13 @@ catch (SoapFault $exception) {
 }
 ?>
 
+<html>
+<head>
+  <title>Request to Use OKU Library Space</title>
+  <link rel="stylesheet" type="text/css" href="css/roomreserve.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
+</head>
 <body>
   <div class="cornell-brand">
     <div class="container">
