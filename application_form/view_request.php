@@ -19,7 +19,7 @@ $hashids = new Hashids\Hashids($cul_ini_array['hashid_salt']);
 $id = $_GET['id'];
 list($issue_id, $email) = decode_hash($hashids, $id);
 
-echo '<html><head><title>Request to Use OKU Library Space</title><link rel="stylesheet" type="text/css" href="css/roomreserve.css"/>';
+echo '<html><head><title>Request to Use OKU Library Space</title><link rel="shortcut icon" href="img/favicon.png" type="image/png" /><link rel="stylesheet" type="text/css" href="css/roomreserve.css"/>';
 echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>';
 echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>';
 echo '</head>';
