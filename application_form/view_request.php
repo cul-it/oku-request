@@ -38,19 +38,17 @@ catch (SoapFault $exception) {
 ?>
 
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="cornell-brand">
     <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="rooms.html">CUL Room Reservation System</a>
+      <a class="visible-xs" href="http://www.cornell.edu"><img src="img/cornell-red.gif" alt="Cornell University"></a>
+      <div class="cornell-logo">
+        <a href="http://www.cornell.edu"><img src="img/CU-Insignia-White-120.png" alt="Cornell University" class="insignia hidden-xs"></a>
+        <div class="library-brand">
+          <a href="/">Cornell University Library</a>
+        </div>
       </div>
     </div>
-  </nav>
+  </div>
   
 <?php
 echo '<div class="jumbotron"><div class="container">';
