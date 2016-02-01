@@ -233,11 +233,13 @@ require_once('../library/Hashids/Hashids.php');
 $issueTitle = $_POST['title'];
 
 # Use built-in SOAP service to create new issue
-$client = new SoapClient('http://mjc12-dev.library.cornell.edu/room_reservation/api/soap/mantisconnect.php?wsdl');
+$cul_ini_array = parse_ini_file('../cul_config.ini');
+$url_base = $cul_ini_array['api_url_base'];
+$client = new SoapClient("http://$url_base/api/soap/mantisconnect.php?wsdl");
 $project = new StdClass;
 $project->id = 1;
 $issueData = array('project' => $project, 'summary' => $issueTitle, 'description' => $text, 'category' => 'General');
-$newIssueId = $client->mc_issue_add('Administrator', 'root', $issueData);
+$newIssueId = $client->mc_issue_add($cul_ini_array['api_user'], $cul_ini_array['api_pass'], $issueData);
 
 # Handle attachments
 if ($_FILES['attachment']['error'] != 4) {
@@ -307,7 +309,6 @@ else {
 
   # Create a hashed link ID from the new issue number and the requestor's
   # email address (this can be de-hashed to retrieve the original values)
-  $cul_ini_array = parse_ini_file('../cul_config.ini');
   $hashids = new Hashids\Hashids($cul_ini_array['hashid_salt']);
   $hash_array = encode_link($newIssueId, $_POST['submitter_email']);
   $link_id = $hashids->encode($hash_array);

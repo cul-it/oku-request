@@ -11,5 +11,10 @@ db_user =
 db_pass = 
 db_database = 
 
+[mantis]
+api_user =
+api_pass =
+api_url_base =
+
 [Hashids]
 hashid_salt = 
