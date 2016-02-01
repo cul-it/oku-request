@@ -267,17 +267,17 @@ if ($_FILES['attachment']['error'] != 4) {
   }
 
   // Check file size
-  if ($_FILES["fileToUpload"]["size"] > 500000) {
+  if ($_FILES["fileToUpload"]["size"] > (1048576)) {
       echo "Your file could not be uploaded (file size too large)";
       $uploadOk = 0;
   }
 
-  // Allow certain file formats
-  // if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-  // && $imageFileType != "gif" && $imageFileType != 'pdf' && $imageFileType != 'txt') {
-  //     echo "Your file could not be uploaded (bad file type)";
-  //     $uploadOk = 0;
-  // }
+  // Allow only certain file formats
+  if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+  && $imageFileType != "gif" && $imageFileType != 'pdf' && $imageFileType != 'txt') {
+      echo "Your file could not be uploaded (bad file type)";
+      $uploadOk = 0;
+  }
 
   // Check if $uploadOk is set to 0 by an error
   if ($uploadOk == 0) {

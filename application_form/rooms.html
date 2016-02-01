@@ -69,7 +69,7 @@
   
   <div class="container">
     <h1>Request to Use Olin/Kroch/Uris Library Space</h1>
-    <div class="alert alert-warning" role="alert">NOTE: This request has not been approved until you receive official confirmation from Library Administration, either by phone, email, or in print. Until then, please do not assume this is a contract or that you have a reservation otherwise.</div>
+    <div class="alert alert-warning" role="alert">NOTE: This request has not been approved until you receive official confirmation from Library Administration, either by phone, email, or in print. Until then, please do not assume this is a contract or that you have a reservation.</div>
     <div class="container" id="request_form">
     <form id="request_form" action="rooms.php" method="post" enctype="multipart/form-data" class="form">
       <div class="form-group">
@@ -90,8 +90,8 @@
         <input type="text" class="form-control" name="title" value="" required>
       </div>
       <div class="form-group">
-        <label for="sponsor" class="control-label required">Sponsoring group/department</label>
-        <input type="text" class="form-control" name="sponsor" value="" required>
+        <label for="sponsor" class="control-label">Sponsoring group/department</label>
+        <input type="text" class="form-control" name="sponsor" value="">
       </div>
       <div class="form-group">
         <label for="sponsor_is_cu_affiliate" class="control-label">Is the sponsoring organization a part of the Cornell community?</label>
@@ -99,7 +99,7 @@
         <input type="radio" name="sponsor_is_cu_affiliate" value="no">No</input>    
       </div>
       <div class="form-group">
-        <label for="account_number" class="control-label">Please provide an account number for incurred charges:</label>
+        <label for="account_number" class="control-label">Please provide an account number for any incurred charges:</label>
         <input type="text" class="form-control" name="account_number" value="">
       </div>  
       <div class="form-group">
@@ -159,7 +159,7 @@
       </div>
 
       <h4>Locations</h4>
-      <p>Room capacities are noted in parentheses</p>
+      <p>Room capacities are noted in parentheses. Room setup must be approved; some rooms have restrictions. If possible, provide a detailed description below or attach a floor plan.</p>
       <div class="form-group">
         <label class="control-label" for "Olin">Olin Library</label>
         <label class="checkbox-inline" for="olin_703">
@@ -172,15 +172,15 @@
           <input type="checkbox" name="olin_locations[olin_106G]" id="olin_106G"/>106G Olin (40)
         </label>
         <label class="checkbox-inline" for="olin_cafe">
-          <input type="checkbox" name="olin_locations[olin_cafe]" id="olin_cafe"/>Libe Caf&#233; (150 - chairs only)
+          <input type="checkbox" name="olin_locations[olin_cafe]" id="olin_cafe"/>Libe Caf&#233; (150 with chairs)
         </label>
         <label class="checkbox-inline" for="olin_other">
           <input type="checkbox" name="olin_locations[olin_other]" id="olin_other"/>Other:
           <input type="text" name="olin_other_val" id="olin_other_val"/>
         </label>
-        <br/><label class="control-label" for "Kroch">Kroch Library</label>
+        <br/><label class="control-label" for "Kroch">Kroch Library (restrictions)</label>
         <label class="checkbox-inline" for="kroch_2b48">
-          <input type="checkbox" name="kroch_locations[kroch_2b48]" id="kroch_2b48"/>2B48 Kroch (75 - chairs only)
+          <input type="checkbox" name="kroch_locations[kroch_2b48]" id="kroch_2b48"/>2B48 Kroch (75 with chairs)
         </label>
         <label class="checkbox-inline" for="kroch_2b49">
           <input type="checkbox" name="kroch_locations[kroch_2b49]" id="kroch_2b49"/>2B49 Kroch (conf) (20)
@@ -197,7 +197,7 @@
           <input type="checkbox" name="uris_locations[uris_cafe]" id="uris_cafe"/>Tower Caf&#233; (49)
         </label>
         <label class="checkbox-inline" for="uris_kinkeldey">
-          <input type="checkbox" name="uris_locations[uris_kinkeldey]" id="uris_kinkeldey"/>Kinkeldey Room (45)
+          <input type="checkbox" name="uris_locations[uris_kinkeldey]" id="uris_kinkeldey"/>Kinkeldey Room (45 - restrictions)
         </label>
         <label class="checkbox-inline" for="uris_cocktail">
           <input type="checkbox" name="uris_locations[uris_cocktail]" id="uris_cocktail"/>Cocktail Lounge (125)
@@ -221,11 +221,11 @@
       </div>  
     
       <div class="form-group">
-        <label for="event_description" class="control-label required">Description of event</label>
+        <label for="event_description" class="control-label required">Description of event (please be specific)</label>
         <textarea class="form-control" name="event_description" required></textarea>
       </div>        
       <div class="form-group">
-        <label for="event_setup" class="control-label required">Please describe your event setup</label>
+        <label for="event_setup" class="control-label required">Describe your event setup (please be specific)</label>
         <textarea class="form-control" name="event_setup" required></textarea>
       </div>  
       
@@ -274,7 +274,7 @@
       </div> 
       
       <div class="form-group">
-        <label for="attachment" class="control-label">Attach a file</label>
+        <label for="attachment" class="control-label">Attach a file (maximum file size is 1 MB)</label>
         <input type="file" name="attachment" />
       </div>
       
