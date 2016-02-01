@@ -1,0 +1,11 @@
+core/*
+css/*
+doc/*
+images/*
+javascript/*
+lang/*
+library/*
+plugins/*
+scripts/*
+cul_config.ini
+application_form/uploads/*
