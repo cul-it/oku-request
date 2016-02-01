@@ -27,8 +27,9 @@ echo '</head>';
 # Get bug data from Mantis
 #$bugdata = bug_get($issue_id, true);
 try {
-  $client = new SoapClient('http://mjc12-dev.library.cornell.edu/room_reservation/api/soap/mantisconnect.php?wsdl');
-  $issueData = $client->mc_issue_get('Administrator', 'root', $issue_id);
+  $url_base = $cul_ini_array['api_url_base'];
+  $client = new SoapClient("http://$url_base/api/soap/mantisconnect.php?wsdl");
+  $issueData = $client->mc_issue_get($cul_ini_array['api_user'], $cul_ini_array['api_pass'], $issue_id);
 }
 catch (SoapFault $exception) {
   echo "ERROR: could not find request (" . $exception->getMessage() . ')';
