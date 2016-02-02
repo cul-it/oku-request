@@ -135,5 +135,5 @@ $g_status_colors['acknowledged'] = '#33AA22'; # This is actually 'approved'
 $g_status_colors['confirmed'] = '#FF3333'; # This is actually 'disapproved'
 
 # --- set up email notifications ---
-$g_notify_flags['new']['threshold_min'] = DEVELOPER;
+$g_notify_flags['new']['threshold_min'] = UPDATER;
 $g_notify_flags['new']['threshold_max'] = MANAGER;

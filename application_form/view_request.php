@@ -19,11 +19,6 @@ $hashids = new Hashids\Hashids($cul_ini_array['hashid_salt']);
 $id = $_GET['id'];
 list($issue_id, $email) = decode_hash($hashids, $id);
 
-echo '<html><head><title>Request to Use OKU Library Space</title><link rel="stylesheet" type="text/css" href="css/roomreserve.css"/>';
-echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>';
-echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>';
-echo '</head>';
-
 # Get bug data from Mantis
 #$bugdata = bug_get($issue_id, true);
 try {
@@ -37,20 +32,26 @@ catch (SoapFault $exception) {
 }
 ?>
 
+<html>
+<head>
+  <title>Request to Use OKU Library Space</title>
+  <link rel="shortcut icon" href="img/favicon.png" type="image/png" />
+  <link rel="stylesheet" type="text/css" href="css/roomreserve.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
+</head>
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="cornell-brand">
     <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="rooms.html">CUL Room Reservation System</a>
+      <a class="visible-xs" href="http://www.cornell.edu"><img src="img/cornell-red.gif" alt="Cornell University"></a>
+      <div class="cornell-logo">
+        <a href="http://www.cornell.edu"><img src="img/CU-Insignia-White-120.png" alt="Cornell University" class="insignia hidden-xs"></a>
+        <div class="library-brand">
+          <a href="/">Cornell University Library</a>
+        </div>
       </div>
     </div>
-  </nav>
+  </div>
   
 <?php
 echo '<div class="jumbotron"><div class="container">';

@@ -242,6 +242,7 @@ $issueData = array('project' => $project, 'summary' => $issueTitle, 'description
 $newIssueId = $client->mc_issue_add($cul_ini_array['api_user'], $cul_ini_array['api_pass'], $issueData);
 
 # Handle attachments
+$errorMessage = '';
 if ($_FILES['attachment']['error'] != 4) {
   # TODO: the file upload routine is kludgy. It would be better to read the 
   # temporary file directly and pass it to the soap request, rather than saving 
@@ -264,26 +265,26 @@ if ($_FILES['attachment']['error'] != 4) {
 
   // Check if file already exists
   if (file_exists($target_file)) {
-      echo "Your file could not be uploaded (file already exists)";
+      $errorMessage = "Your file could not be uploaded (file already exists)";
       $uploadOk = 0;
   }
 
   // Check file size
   if ($_FILES["fileToUpload"]["size"] > (1048576)) {
-      echo "Your file could not be uploaded (file size too large)";
+      $errorMessage = "Your file could not be uploaded (file size too large)";
       $uploadOk = 0;
   }
 
   // Allow only certain file formats
   if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
   && $imageFileType != "gif" && $imageFileType != 'pdf' && $imageFileType != 'txt') {
-      echo "Your file could not be uploaded (bad file type)";
+      $errorMessage = "Your file could not be uploaded (bad file type)";
       $uploadOk = 0;
   }
 
   // Check if $uploadOk is set to 0 by an error
   if ($uploadOk == 0) {
-      echo "Your file could not be uploaded";
+      $errorMessage = "Your file could not be uploaded";
   // if everything is ok, try to upload file
   } else {
       if (move_uploaded_file($_FILES["attachment"]["tmp_name"], $target_file)) {
@@ -295,15 +296,43 @@ if ($_FILES['attachment']['error'] != 4) {
         
         #echo "The file ". basename( $_FILES["attachment"]["name"]). " has been uploaded.";
       } else {
-        echo "Your file could not be uploaded";
+        $errorMessage = "Your file could not be uploaded";
       }
   }
+}
+?>
+
+<html>
+<head>
+  <title>Request to Use OKU Library Space</title>
+  <link rel="shortcut icon" href="img/favicon.png" type="image/png" />
+  <link rel="stylesheet" type="text/css" href="css/roomreserve.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
+</head>
+<body>
+  <div class="cornell-brand">
+    <div class="container">
+      <a class="visible-xs" href="http://www.cornell.edu"><img src="img/cornell-red.gif" alt="Cornell University"></a>
+      <div class="cornell-logo">
+        <a href="http://www.cornell.edu"><img src="img/CU-Insignia-White-120.png" alt="Cornell University" class="insignia hidden-xs"></a>
+        <div class="library-brand">
+          <a href="/">Cornell University Library</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+<?php
+
+if ($errorMessage != '') {
+  echo "<p>$errorMessage";
 }
 
 # Not sure if id < 1 is an accurate error flag — the create function
 # doesn't say what happens if the write fails.
 if ($newIssueId < 1) {
-  print "\nSomething went wrong.";
+  print "\nSomething went wrong -- your request could not be submitted.";
 }
 else { 
 
@@ -313,7 +342,7 @@ else {
   $hash_array = encode_link($newIssueId, $_POST['submitter_email']);
   $link_id = $hashids->encode($hash_array);
   
-  echo "<p>You have created request #$newIssueId: " . $issueTitle . '</p>';
+  echo "<h1>You have created request #$newIssueId: $issueTitle</h1>";
   
 ?>
   <br><br><p>Thank you for submitting your request using the online Library Space Request Form.</p> 
@@ -324,6 +353,7 @@ else {
   
   echo '<strong><a href="' .  url_for_client($link_id) . '">' . url_for_client($link_id) . '</a></strong>';
   echo '<p>A confirmation email with this information will be sent to you shortly.</p>';
+  echo '</div>';
   
   send_email($issueTitle, $_POST['submitter_email'], $newIssueId, $link_id);
 }
