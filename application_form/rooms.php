@@ -305,7 +305,6 @@ if ($_FILES['attachment']['error'] != 4) {
 <html>
 <head>
   <title>Request to Use OKU Library Space</title>
-  <link rel="shortcut icon" href="img/favicon.png" type="image/png" />
   <link rel="stylesheet" type="text/css" href="css/roomreserve.css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
@@ -342,7 +341,7 @@ else {
   $hash_array = encode_link($newIssueId, $_POST['submitter_email']);
   $link_id = $hashids->encode($hash_array);
   
-  echo "<h1>You have created request #$newIssueId: $issueTitle</h1>";
+  echo "<p>You have created request #$newIssueId: $issueTitle</p>";
   
 ?>
   <br><br><p>Thank you for submitting your request using the online Library Space Request Form.</p> 
@@ -412,9 +411,11 @@ function encode_link($issue_id, $email) {
 }
 
 function url_for_client($issue_id){
+  $cul_ini_array = parse_ini_file('../cul_config.ini');
+  $url_base = $cul_ini_array['api_url_base'];
   $protocol = (isset($_SERVER['HTTPS']) ? 'https' : 'http');
-  $hostname = $_SERVER['SERVER_NAME'];
-  return "$protocol://$hostname/room_reservation/application_form/view_request.php?id=$issue_id";
+  #$hostname = $_SERVER['SERVER_NAME'];
+  return "$protocol://$url_base/application_form/view_request.php?id=$issue_id";
 }
 
 # Send email to requestor
