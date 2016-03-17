@@ -15,3 +15,6 @@ $s_confirmed_bug_button = 'Disapprove Request';
 
 $s_closed_bug_title = 'Cancel Request';
 $s_closed_bug_button = 'Cancel Request';
+
+# Column headers for issue list page
+$s_summary = 'Title';
