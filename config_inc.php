@@ -116,7 +116,7 @@ $g_bug_view_page_fields = array (
   'description',
   'additional_info',
   #'steps_to_reproduce',
-  'tags',
+  #'tags',
   'attachments',
   'due_date',
 );
