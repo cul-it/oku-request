@@ -6,6 +6,7 @@ javascript/*
 lang/*
 library/*
 plugins/*
+!plugins/CULRequesterEmail
 scripts/*
 cul_config.ini
 application_form/uploads/*
