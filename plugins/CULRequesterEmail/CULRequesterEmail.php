@@ -20,13 +20,13 @@ class CULRequesterEmailPlugin extends MantisPlugin {
   }
   
   /* This is the plugin's sole purpose: When an item's status is changed to
-   * one of the 'final' statuses - 30 (approved) or 40 (disapproved) — then
-   * send an email alert to the peroson who originally requested the reservation.
+   * one of the 'final' statuses - 30 (approved), 40 (disapproved), or 50 (cancelled) 
+   * — then send an email alert to the peroson who originally requested the reservation.
    */
   function update_bug_form($event, $params) {
     
     // Only send if new status is approved or disapproved
-    if ($params->status == 30 || $params->status == 40) {
+    if ($params->status == 30 || $params->status == 40 || $params->status == 50) {
       // Pull the submitter's email out of the description text
       preg_match('/submitted by\: (.+)\r/', $params->description, $matches);
       //error_log('test: ' . $params->status);
@@ -36,10 +36,13 @@ class CULRequesterEmailPlugin extends MantisPlugin {
       $title = $params->summary;
       $result = '';
       if ($params->status == 30) {
-        $result = 'APPROVED';
+        $result = 'has been APPROVED';
       }
       elseif ($params->status == 40) {
-        $result = 'NOT APPROVED';
+        $result = 'is NOT APPROVED';
+      }
+      elseif ($params->status == 50) {
+        $result = 'has been CANCELLED';
       }
       
       # Send email to requestor
@@ -48,7 +51,7 @@ class CULRequesterEmailPlugin extends MantisPlugin {
                  'Content-Type: text/html; charset=utf-8' . "\r\n" .
                  'X-Mailer: PHP/' . phpversion();
       $emailSubject = "Room reservation application notice";
-      $emailText = "<html><head><title>OKU Room Reservation Request Status</title><body><p>The room reservation request you submitted to the online tracking system with ID #$id and title '$title' has been resolved. Your reservation is $result.</p><p>If you have questions about the status of your request, please email <a mailto:cjl10@cornell.edu>CJ Lance</a> (cjl10@cornell.edu).</p></body></html>";
+      $emailText = "<html><head><title>OKU Room Reservation Request Status</title><body><p>The room reservation request you submitted to the online tracking system with ID #$id and title '$title' has been resolved. Your reservation $result.</p><p>If you have questions about the status of your request, please email <a mailto:cjl10@cornell.edu>CJ Lance</a> (cjl10@cornell.edu).</p></body></html>";
       mail($email, $emailSubject, $emailText, $headers);
       
       
