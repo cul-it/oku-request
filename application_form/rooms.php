@@ -9,7 +9,7 @@ $text .= title('General Information');
 # title
 $text .= add_text('title');
 # email
-$text .= 'submitted by: ' . $_POST['submitter_email'] . "\n";
+$text .= 'submitted by: ' . $_POST['submitter_name'] . ' (' . $_POST['submitter_email'] . ")\n";
 #phone
 $text .= 'phone number: ' . $_POST['submitter_phone'] . "\n";
 # sponsor
