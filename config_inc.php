@@ -53,11 +53,11 @@ $g_phpMailer_method		= PHPMAILER_METHOD_MAIL; # or PHPMAILER_METHOD_SMTP, PHPMAI
 $g_smtp_host			= 'localhost';			# used with PHPMAILER_METHOD_SMTP
 $g_smtp_username		= '';					# used with PHPMAILER_METHOD_SMTP
 $g_smtp_password		= '';					# used with PHPMAILER_METHOD_SMTP
-$g_administrator_email  = 'administrator@example.com';
-$g_webmaster_email      = 'webmaster@example.com';
+$g_administrator_email  = 'cjl10@cornell.edu';
+$g_webmaster_email      = '';
 $g_from_email           = 'cul-room-reservation@cornell.edu';	# the "From: " field in emails
-$g_return_path_email    = 'admin@example.com';	# the return address for bounced mail
-$g_from_name			= 'CUL Room Reservation System';
+$g_return_path_email    = 'cjl10@cornell.edu';	# the return address for bounced mail
+$g_from_name			= 'OKU Room Reservation System';
 $g_email_receive_own	= ON;
 # $g_email_send_using_cronjob = OFF;
 
@@ -71,7 +71,7 @@ $g_max_file_size		= 1048576;	# in bytes
 # $g_disallowed_files		= '';		# extensions comma separated
 
 # --- Branding ---
-$g_window_title			= 'CUL Room Reservation System';
+$g_window_title			= 'OKU Room Reservation System';
 $g_logo_image			= 'application_form/img/cul.gif';
 # $g_favicon_image		= 'images/favicon.ico';
 
