@@ -27,10 +27,6 @@ class CULRequesterEmailPlugin extends MantisPlugin {
     
     // Only send if new status is approved or disapproved
     if ($params->status == 30 || $params->status == 40 || $params->status == 50) {
-      fwrite($logfile, "\nstatus works");
-      // Pull the submitter's email out of the description text
-      preg_match('/submitted by\:.*\((.+)\)\r/', $params->description, $matches);
-      //error_log('test: ' . $params->status);
       
       $email = $params->additional_information;
       $id = $params->id;
