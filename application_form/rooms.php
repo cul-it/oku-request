@@ -247,6 +247,8 @@ $issueData = array('project' => $project,
                    'summary' => $issueTitle, 
                    'description' => $text, 
                    'category' => 'General',
+                   # NOTE: using additional_information to store submitter email
+                   'additional_information' => $_POST['submitter_email'],
                    'custom_fields' => array(array('field' => array('id' => 5), 
                                                   'value' => $location_text),
                                             array('field' => array('id' => 4),
