@@ -55,7 +55,7 @@ $text .= title('Event Information');
 
 // Locations
 $location_text = '';
-if ($_POST['olin_locations']) {
+if (isset($_POST['olin_locations'])) {
   foreach (array_keys($_POST['olin_locations']) as $loc) {
     $location_text .= "\n$loc";
   }
@@ -63,7 +63,7 @@ if ($_POST['olin_locations']) {
     $location_text .= "\nOther location: " . $_POST['olin_other_val'];
   }
 }
-if ($_POST['kroch_locations']) {
+if (isset($_POST['kroch_locations'])) {
   foreach (array_keys($_POST['kroch_locations']) as $loc) {
     $location_text .= "\n$loc";
   }
@@ -71,7 +71,7 @@ if ($_POST['kroch_locations']) {
     $location_text .= "\nOther location: " . $_POST['kroch_other_val'];
   }
 }
-if ($_POST['uris_locations']) {
+if (isset($_POST['uris_locations'])) {
   foreach (array_keys($_POST['uris_locations']) as $loc) {
     $location_text .= "\n$loc";
   }
@@ -238,7 +238,23 @@ $url_base = $cul_ini_array['api_url_base'];
 $client = new SoapClient("http://$url_base/api/soap/mantisconnect.php?wsdl");
 $project = new StdClass;
 $project->id = 1;
-$issueData = array('project' => $project, 'summary' => $issueTitle, 'description' => $text, 'category' => 'General');
+$dateToPost = strtotime($_POST['start_date']);
+# IDs for custom fields:
+#   4 => date of event
+#   5 => room requested
+#   6 => requested by (name)
+$issueData = array('project' => $project, 
+                   'summary' => $issueTitle, 
+                   'description' => $text, 
+                   'category' => 'General',
+                   # NOTE: using additional_information to store submitter email
+                   'additional_information' => $_POST['submitter_email'],
+                   'custom_fields' => array(array('field' => array('id' => 5), 
+                                                  'value' => $location_text),
+                                            array('field' => array('id' => 4),
+                                                  'value' => $dateToPost),
+                                            array('field' => array('id' => 6),
+                                                  'value' => $_POST['submitter_name'])));
 $newIssueId = $client->mc_issue_add($cul_ini_array['api_user'], $cul_ini_array['api_pass'], $issueData);
 
 # Handle attachments
@@ -432,4 +448,3 @@ function send_email($title, $email, $issue_id, $link_id) {
 }
 
 ?>
-
