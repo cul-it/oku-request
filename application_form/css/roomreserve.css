@@ -24,6 +24,10 @@ input:required:valid {
 .custom-fields {
 }
 
+.de-visual {
+  display: none;
+}
+
 .custom-field-status {
   /*width: 50%;*/
   padding: 10px;

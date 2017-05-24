@@ -1,5 +1,12 @@
 <?php
 
+// Check honeypot
+if ($_POST['username']) {
+  $timestamp = date("Y-m-d H:i", time());
+  file_put_contents('spam_log', "Blocked suspected spam at $timestamp: " . $_POST['event_description'], FILE_APPEND);
+  header( 'Location: rooms.html' );
+}
+
 // echo "got back: " . print_r($_POST,1);
 // return 0;
 $text = '';
