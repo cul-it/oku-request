@@ -1,5 +1,12 @@
-<!doctype html>
-<meta http-equiv="refresh" content="0.1;url=apply.php">
+<?php
+# Use Hashids libraries to encode timestamp
+require_once('../library/Hashids/HashGenerator.php');
+require_once('../library/Hashids/Hashids.php');
+
+$cul_ini_array = parse_ini_file('../cul_config.ini');
+$hashids = new Hashids\Hashids($cul_ini_array['hashid_salt']);
+$hashed_time = $hashids->encode(time());
+?>
 
 <html lang="en">
 <head>
@@ -28,52 +35,13 @@
       </div>
     </div>
   </div>
-
-
-  <!-- <div class="cornell-brand">
-    <div class="container">
-      <div class="row">
-        <a class="navbar-brand visible-xs" href="http://www.cornell.edu"><img src="/sites/all/themes/bootstrap_cul7/img/layout/cornell-red.gif" alt="Cornell University"></a>
-        <div class="navbar-header visible-xs">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="cornell-logo">
-          <a href="http://www.cornell.edu"><img src="/sites/all/themes/bootstrap_cul7/img/layout/CU-Insignia-White-120.png" alt="Cornell University" class="insignia hidden-xs"></a>
-          <div class="library-brand">
-            <a href="/">Cornell University Library</a>
-          </div>
-        </div>
-        <div class="nav-global hidden-xs">
-          <?php print render($page['header']); ?>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="rooms.html">Request to Use OKU Library Space</a>
-      </div>
-    </div>
-  </nav> -->
   
   <div class="container">
     <h1>Request to Use Olin/Kroch/Uris Library Space</h1>
     <div class="alert alert-warning" role="alert">NOTE: This request has not been approved until you receive official confirmation from Library Administration, either by phone, email, or in print. Until then, please do not assume this is a contract or that you have a reservation.</div>
     <div class="container" id="request_form">
     <form id="request_form" action="rooms.php" method="post" enctype="multipart/form-data" class="form">
-      <input type="hidden" name="formLoaded3fk7sa11" value="<?php echo time(); ?>" />
+      <input type="hidden" name="formLoaded3fk7sa11" value="<?php echo $hashed_time; ?>" />
       <div class="form-group">
         <label for="submitter_name" class="control-label required">Your name</label>
         <input type="text" class="form-control" name="submitter_name" value="" required>

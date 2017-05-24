@@ -1,5 +1,21 @@
 <?php
 
+# Use Hashids libraries to decode request URLs and timestamp
+require_once('../library/Hashids/HashGenerator.php');
+require_once('../library/Hashids/Hashids.php');
+
+$cul_ini_array = parse_ini_file('../cul_config.ini');
+$hashids = new Hashids\Hashids($cul_ini_array['hashid_salt']);
+$timestamp = $hashids->decode($_POST['formLoaded3fk7sa11']);
+
+// Check honeypot and timestamp. The timestamp must be at least 15 seconds in the past -
+// otherwise it's safe to assume that a bot submitted the form.
+if ($_POST['username'] || (time() - (int)join('',$timestamp) < 15)) {
+  $timestamp = date("Y-m-d H:i", time());
+  file_put_contents('spam_log', "Blocked suspected spam at $timestamp: " . $_POST['event_description'], FILE_APPEND);
+  header( 'Location: rooms.html' );
+}
+
 // echo "got back: " . print_r($_POST,1);
 // return 0;
 $text = '';
@@ -216,9 +232,7 @@ $t_core_path = config_get('core_path');
 require_once( $t_core_path.'email_api.php' );
 
 
-# Use Hashids libraries to decode request URLs
-require_once('../library/Hashids/HashGenerator.php');
-require_once('../library/Hashids/Hashids.php');
+
 
 # Create a new Mantis issue (based on e-nerf code)
 // $bugdata = new BugData;
