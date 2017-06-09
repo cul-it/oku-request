@@ -8,23 +8,13 @@ $cul_ini_array = parse_ini_file('../cul_config.ini');
 $hashids = new Hashids\Hashids($cul_ini_array['hashid_salt']);
 $timestamp = $hashids->decode($_POST['formLoaded3fk7sa11']);
 
-echo "<br />Current time: " . time();
-echo "<br />Timestamp: $timestamp";
-echo "<br />Difference: " . (time() - (int)join('',$timestamp));
-exit(0);
 // Check honeypot and timestamp. The timestamp must be at least 15 seconds in the past -
 // otherwise it's safe to assume that a bot submitted the form.
 if ($_POST['submitter_name'] || (time() - (int)join('',$timestamp) < 15)) {
-  $t_orig = $timestamp;
-
   $timestamp = date("Y-m-d H:i", time());
   file_put_contents('spam_log', "Blocked suspected spam at $timestamp:\nYour_name: " . $_POST['your_name'] . "\nSubmitter name: " . $_POST['submitter_name'] . "\nTime diff: " . (time() - (int)join('',$t_orig)) .  "\nIP: " . $_SERVER['REMOTE_ADDR'] . "\n\n", FILE_APPEND);
   header( 'Location: rooms.html' );
   exit(0);
-}
-else {
-  $timestamp = date("Y-m-d H:i", time());
-  file_put_contents('ham_log', "Let through submission at $timestamp:\nYour_name: " . $_POST['your_name'] . "\nSubmitter name: " . $_POST['submitter_name'] . "\nTime diff: " . (time() - (int)join('',$timestamp)) .  "\nIP: " . $_SERVER['REMOTE_ADDR'] . "\n\n", FILE_APPEND);
 }
 
 // echo "got back: " . print_r($_POST,1);
@@ -263,9 +253,7 @@ $url_base = $cul_ini_array['api_url_base'];
 $client = new SoapClient("http://$url_base/api/soap/mantisconnect.php?wsdl");
 $project = new StdClass;
 
-########################## DEBUG ONLY, should be 1 ##################################
-$project->id = 2;
-#####################################################################################
+$project->id = 1;
 $dateToPost = strtotime($_POST['start_date']);
 # IDs for custom fields:
 #   4 => date of event
