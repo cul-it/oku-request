@@ -10,7 +10,7 @@ $timestamp = $hashids->decode($_POST['formLoaded3fk7sa11']);
 
 // Check honeypot and timestamp. The timestamp must be at least 15 seconds in the past -
 // otherwise it's safe to assume that a bot submitted the form.
-if ($_POST['username'] || (time() - (int)join('',$timestamp) < 15)) {
+if ($_POST['submitter_name'] || (time() - (int)join('',$timestamp) < 15)) {
   $timestamp = date("Y-m-d H:i", time());
   file_put_contents('spam_log', "Blocked suspected spam at $timestamp: " . $_POST['event_description'], FILE_APPEND);
   header( 'Location: rooms.html' );
@@ -25,7 +25,7 @@ $text .= title('General Information');
 # title
 $text .= add_text('title');
 # email
-$text .= 'submitted by: ' . $_POST['submitter_name'] . ' (' . $_POST['submitter_email'] . ")\n";
+$text .= 'submitted by: ' . $_POST['your_name'] . ' (' . $_POST['submitter_email'] . ")\n";
 #phone
 $text .= 'phone number: ' . $_POST['submitter_phone'] . "\n";
 # sponsor
@@ -268,7 +268,7 @@ $issueData = array('project' => $project,
                                             array('field' => array('id' => 4),
                                                   'value' => $dateToPost),
                                             array('field' => array('id' => 6),
-                                                  'value' => $_POST['submitter_name'])));
+                                                  'value' => $_POST['your_name'])));
 $newIssueId = $client->mc_issue_add($cul_ini_array['api_user'], $cul_ini_array['api_pass'], $issueData);
 
 # Handle attachments

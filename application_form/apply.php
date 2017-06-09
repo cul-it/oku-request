@@ -43,8 +43,8 @@ $hashed_time = $hashids->encode(time());
     <form id="request_form" action="rooms.php" method="post" enctype="multipart/form-data" class="form">
       <input type="hidden" name="formLoaded3fk7sa11" value="<?php echo $hashed_time; ?>" />
       <div class="form-group">
-        <label for="submitter_name" class="control-label required">Your name</label>
-        <input type="text" class="form-control" name="submitter_name" value="" required>
+        <label for="your_name" class="control-label required">Your name</label>
+        <input type="text" class="form-control" name="your_name" value="" required>
       </div>
       <div class="form-group">
         <label for="submitter_email" class="control-label required">Your email</label>
@@ -60,8 +60,8 @@ $hashed_time = $hashids->encode(time());
         <input type="text" class="form-control" name="title" value="" required>
       </div>
       <div class="form-group de-visual" aria-hidden="true">
-        <label for="username" class="control-label required">Username</label>
-        <input type="text" class="form-control" name="username" value="" placeholder="Leave this field blank" autocomplete="off">
+        <label for="submitter_name" class="control-label required">Submitter name</label>
+        <input type="text" class="form-control" name="submitter_name" value="" placeholder="Leave this field blank" autocomplete="off">
       </div>
       <div class="form-group">
         <label for="sponsor" class="control-label">Sponsoring group/department</label>
