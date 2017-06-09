@@ -20,7 +20,6 @@ if ($_POST['submitter_name'] || (time() - (int)join('',$timestamp) < 15)) {
 else {
   $timestamp = date("Y-m-d H:i", time());
   file_put_contents('ham_log', "Let through submission at $timestamp:\nYour_name: " . $_POST['your_name'] . "\nSubmitter name: " . $_POST['submitter_name'] . "\nTime diff: " . (time() - (int)join('',$timestamp)) .  "\nIP: " . $_SERVER['REMOTE_ADDR'] . "\n\n", FILE_APPEND);
-  header( 'Location: rooms.html' );
 }
 
 // echo "got back: " . print_r($_POST,1);
