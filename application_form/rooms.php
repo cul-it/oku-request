@@ -11,7 +11,7 @@ $timestamp = $hashids->decode($_POST['formLoaded3fk7sa11']);
 // Check honeypot and timestamp. The timestamp must be at least 15 seconds in the past -
 // otherwise it's safe to assume that a bot submitted the form.
 if ($_POST['submitter_name'] || (time() - (int)join('',$timestamp) < 15)) {
-  $t_orig = $timestamp
+  $t_orig = $timestamp;
   $timestamp = date("Y-m-d H:i", time());
   file_put_contents('spam_log', "Blocked suspected spam at $timestamp:\nYour_name: " . $_POST['your_name'] . "\nSubmitter name: " . $_POST['submitter_name'] . "\nTime diff: " . (time() - (int)join('',$t_orig)) .  "\nIP: " . $_SERVER['REMOTE_ADDR'] . "\n\n", FILE_APPEND);
   header( 'Location: rooms.html' );
